@@ -1,2 +1,5 @@
 export {default as MenuComponent} from './Menu'
 export {default as Filter} from './Filter'
+export {default as BookCard} from './BookCard'
+export {default as CartItem} from './CartItem'
+export {default as PopupMenu} from './PopupMenu'

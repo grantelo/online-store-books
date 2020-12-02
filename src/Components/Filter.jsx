@@ -2,38 +2,43 @@ import React from 'react'
 
 import { Menu, Input } from 'semantic-ui-react'
 
-function Filter() {
-    const [activeItem, setActiveItem] = React.useState('all')
+function Filter({ sortBy, searchQuery, onSetFilter, onSetSearchQuery }) {
 
-    const handlerActiveItem = (category) => {
-        setActiveItem(category)
+    const onClickSetFilter = (sortBy) => {
+        onSetFilter(sortBy)
+    }
+
+    const onClickSetSearchQuery = (e) => {
+        onSetSearchQuery(e.target.value)
     }
 
     return (
         <Menu secondary>
             <Menu.Item
-                active={activeItem === 'all'}
-                onClick={() => handlerActiveItem('all')}
+                active={sortBy === 'all'}
+                onClick={() => onClickSetFilter('all')}
             >   Все
             </Menu.Item>
             <Menu.Item
-                active={activeItem === 'price_high'}
-                onClick={() => handlerActiveItem('price_high')}>
+                active={sortBy === 'price_high'}
+                onClick={() => onClickSetFilter('price_high')}>
                 Цена(дорогие)
             </Menu.Item>
             <Menu.Item
-                active={activeItem === 'price_low'}
-                onClick={() => handlerActiveItem('price_low')}
+                active={sortBy === 'price_low'}
+                onClick={() => onClickSetFilter('price_low')}
             >
                 Цена(дешевле)
             </Menu.Item>
             <Menu.Item
-                active={activeItem === 'author'}
-                onClick={() => handlerActiveItem('author')}
+                active={sortBy === 'author'}
+                onClick={() => onClickSetFilter('author')}
             >
                 Автор
             </Menu.Item>
             <Input
+                onChange={onClickSetSearchQuery}
+                value={searchQuery}
                 icon="search"
                 placeholder="Введите запрос"
             />
@@ -41,4 +46,4 @@ function Filter() {
     )
 }
 
-export default Filter
+export default React.memo(Filter)
